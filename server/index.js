@@ -49,7 +49,7 @@ server.use('/auth', authRouter.router);
 server.use('/cart', isAuth(), cartRouter.router);
 server.use('/orders', isAuth(), ordersRouter.router);
 server.use(cors({
-  origin: ["https://react-ecommerce-website-frontend.vercel.app/"],
+  origin: ["https://react-ecommerce-website-frontend.vercel.app"],
   exposedHeaders:['X-Total-Count'],
 
 }))
