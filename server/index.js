@@ -122,7 +122,7 @@ passport.deserializeUser(function (user, cb) {
 
 main().catch(err=>console.log(err))
 async function main(){
-    await mongoose.connect('mongodb+srv://eklavyalalwani60:n*$3izpxzu9Nh2.cluster0.vlqpmf6.mongodb.net/?retryWrites=true&w=majority');
+    await mongoose.connect('mongodb+srv://eklavyalalwani60:RDHJQLUduMQOb9mB.cluster0.vlqpmf6.mongodb.net/?retryWrites=true&w=majority');
     console.log("database connected");
 }
 server.listen(8080,() => {
