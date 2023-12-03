@@ -1,6 +1,6 @@
 export function fetchAllProducts() {
   return new Promise(async (resolve) => {
-    const response = await fetch("https://react-ecommerce-website-three.vercel.app/products");
+    const response = await fetch("https://react-ecommerce-website-one.vercel.app/products");
     const data = await response.json();
     resolve({ data });
   });
@@ -25,7 +25,7 @@ export function fetchProductsByFilters(filter, sort, pagination) {
   }
   return new Promise(async (resolve) => {
     const response = await fetch(
-      "https://react-ecommerce-website-three.vercel.app/products?" + queryString
+      "https://react-ecommerce-website-one.vercel.app/products?" + queryString
     );
     const data = await response.json();
     const totalItems = await response.headers.get("X-Total-Count");
@@ -36,21 +36,21 @@ export function fetchProductsByFilters(filter, sort, pagination) {
 }
 export function fetchBrands() {
   return new Promise(async (resolve) => {
-    const response = await fetch("https://react-ecommerce-website-three.vercel.app/brands");
+    const response = await fetch("https://react-ecommerce-website-one.vercel.app/brands");
     const data = await response.json();
     resolve({ data });
   });
 }
 export function fetchCategories() {
   return new Promise(async (resolve) => {
-    const response = await fetch("https://react-ecommerce-website-three.vercel.app/categories");
+    const response = await fetch("https://react-ecommerce-website-one.vercel.app/categories");
     const data = await response.json();
     resolve({ data });
   });
 }
 export function fetchProductById(id) {
   return new Promise(async (resolve) => {
-    const response = await fetch("https://react-ecommerce-website-three.vercel.app/products/"+id);
+    const response = await fetch("https://react-ecommerce-website-one.vercel.app/products/"+id);
     const data = await response.json();
     resolve({ data });
   });

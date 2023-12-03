@@ -1,6 +1,6 @@
 export function createUser(userData) {
     return new Promise(async (resolve) => {
-      const response = await fetch("https://react-ecommerce-website-three.vercel.app/auth/signup",{
+      const response = await fetch("https://react-ecommerce-website-one.vercel.app/auth/signup",{
         method: 'POST',
         body: JSON.stringify(userData),
         headers: {'content-type': 'application/json'}
@@ -13,7 +13,7 @@ export function createUser(userData) {
   export function loginUser(loginInfo) {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch('https://react-ecommerce-website-three.vercel.app/auth/login',{
+        const response = await fetch('https://react-ecommerce-website-one.vercel.app/auth/login',{
         method: 'POST',
         body: JSON.stringify(loginInfo),
         headers: {'content-type': 'application/json'}
@@ -34,7 +34,7 @@ export function createUser(userData) {
   export function checkAuth() {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await fetch('https://react-ecommerce-website-three.vercel.app/auth/check');
+        const response = await fetch('https://react-ecommerce-website-one.vercel.app/auth/check');
         if (response.ok) {
           const data = await response.json();
           resolve({ data });
