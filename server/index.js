@@ -14,6 +14,7 @@ const authRouter = require('./routes/Auth');
 const cartRouter = require('./routes/Cart');
 const ordersRouter = require('./routes/Order');
 const cors = require('cors')
+require('dotenv').config();
 
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
@@ -122,7 +123,7 @@ passport.deserializeUser(function (user, cb) {
 
 main().catch(err=>console.log(err))
 async function main(){
-    await mongoose.connect('mongodb+srv://eklavyalalwani60:iNduZVDveDavAmxh@cluster0.vlqpmf6.mongodb.net/ecommerce?retryWrites=true&w=majority');
+    await mongoose.connect(process.env.MONGO_URL);
     console.log("database connected");
 }
 server.listen(8080,() => {
