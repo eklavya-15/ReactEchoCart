@@ -14,6 +14,7 @@ const authRouter = require('./routes/Auth');
 const cartRouter = require('./routes/Cart');
 const ordersRouter = require('./routes/Order');
 const cors = require('cors')
+const path = require('path')
 require('dotenv').config();
 
 const crypto = require('crypto');
@@ -31,7 +32,7 @@ opts.secretOrKey = SECRET_KEY; // TODO: should not be in code;
 
 
 //middlewares
-server.use(express.static('build'))
+server.use(express.static(path.resolve(__dirname,'build')))
 server.use(cookieParser());
 server.use(session({
     secret: 'keyboard cat',
@@ -50,9 +51,7 @@ server.use('/auth', authRouter.router);
 server.use('/cart', isAuth(), cartRouter.router);
 server.use('/orders', isAuth(), ordersRouter.router);
 server.use(cors({
-  origin: ["https://react-ecommerce-website-frontend.vercel.app"],
-  methods: ["POST","GET"],
-  credentials: true,
+ 
   exposedHeaders:['X-Total-Count'],
 
 }))
