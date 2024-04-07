@@ -8,15 +8,16 @@ import {
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectItems } from "../Cart/cartSlice";
+import logo from "../../assets/logo-no-background.png";
 
 const user = {
-  name: "Tom Cook",
+  name: "Eklavya Lalwani",
   email: "tom@example.com",
   imageUrl:
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
+  { name: "Dashboard", link: "/", current: true },
   { name: "Team", href: "#", current: false },
 ];
 const userNavigation = [
@@ -30,28 +31,18 @@ function classNames(...classes) {
 }
 
 export default function Navbar({ children }) {
-  const items = useSelector(selectItems)
+  const items = useSelector(selectItems);
   return (
     <>
       <div className="min-h-full">
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-[#35374B]">
           {({ open }) => (
             <>
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                   <div className="flex items-center">
-                    <div className="flex-shrink-0">
-                      <Link to="/">
-                    
-                      <img
-                        className="h-8 w-8"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                        alt="Your Company"
-                      />
-                        </Link>
-                    </div>
                     <div className="hidden md:block">
-                      <div className="ml-10 flex items-baseline space-x-4">
+                      <div className="ml-6 flex items-baseline space-x-4">
                         {navigation.map((item) => (
                           <a
                             key={item.name}
@@ -73,23 +64,23 @@ export default function Navbar({ children }) {
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
                       <Link to="/cart">
-                      <button
-                       
-                        type="button"
-                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                      >
-                        <span className="absolute -inset-1.5" />
-                        <span className="sr-only">View notifications</span>
+                        <button
+                          type="button"
+                          className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                        >
+                         
 
-                        <ShoppingCartIcon
-                          className="h-6 w-6"
-                          aria-hidden="true"
-                        />
+                          <ShoppingCartIcon
+                            className="h-6 w-6"
+                            aria-hidden="true"
+                          />
                         </button>
-                        </Link>
-                        {items.length>0 && <span className="inline-flex items-center rounded-md mb-7 -ml-3 bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                        {items.length}
-                        </span>}
+                      </Link>
+                      {items.length > 0 && (
+                        <span className="inline-flex items-center rounded-md mb-7 -ml-3 bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                          {items.length}
+                        </span>
+                      )}
 
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
@@ -198,15 +189,17 @@ export default function Navbar({ children }) {
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">View notifications</span>
                       <Link to="/cart">
-                      <ShoppingCartIcon
-                        className="h-6 w-6"
-                        aria-hidden="true"
-                      />
+                        <ShoppingCartIcon
+                          className="h-6 w-6"
+                          aria-hidden="true"
+                        />
                       </Link>
                     </button>
-                    {items.length>0 && <span className="inline-flex items-center rounded-md mb-7 -ml-3 bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                    {items.length > 0 && (
+                      <span className="inline-flex items-center rounded-md mb-7 -ml-3 bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                         {items.length}
-                        </span>}
+                      </span>
+                    )}
                   </div>
                   <div className="mt-3 space-y-1 px-2">
                     {userNavigation.map((item) => (
@@ -226,10 +219,12 @@ export default function Navbar({ children }) {
           )}
         </Disclosure>
 
-        <header className="bg-white shadow">
-          <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <header className="bg-gray-100">
+          <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
             <h1 className="text-6xl font-bold tracking-tight text-gray-900">
-              EchoCart
+              <Link to="/">
+                <img className="h-7 w-25" src={logo} alt="Your Company" />
+              </Link>
             </h1>
           </div>
         </header>

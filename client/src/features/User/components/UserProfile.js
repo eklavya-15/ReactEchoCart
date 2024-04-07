@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUserInfo, updateUserAsync } from '../userSlice';
 import { useForm } from 'react-hook-form';
+import Footer from '../../Footer/Footer';
 
 export default function UserProfile() {
   const dispatch = useDispatch();
-  const user = useSelector(selectUserInfo);
+  const userInfo = useSelector(selectUserInfo);
   const [selectedEditIndex, setSelectedEditIndex] = useState(-1);
   const [showAddAddressForm, setShowAddAddressForm] = useState(false);
 
@@ -20,20 +21,20 @@ export default function UserProfile() {
   } = useForm();
 
   const handleEdit = (addressUpdate, index) => {
-    const newUser = { ...user, addresses: [...user.addresses] }; // for shallow copy issue
+    const newUser = { ...userInfo, addresses: [...userInfo.addresses] }; // for shallow copy issue
     newUser.addresses.splice(index, 1, addressUpdate);
     dispatch(updateUserAsync(newUser));
     setSelectedEditIndex(-1);
   };
   const handleRemove = (e, index) => {
-    const newUser = { ...user, addresses: [...user.addresses] }; // for shallow copy issue
+    const newUser = { ...userInfo, addresses: [...userInfo.addresses] }; // for shallow copy issue
     newUser.addresses.splice(index, 1);
     dispatch(updateUserAsync(newUser));
   };
 
   const handleEditForm = (index) => {
     setSelectedEditIndex(index);
-    const address = user.addresses[index];
+    const address = userInfo.addresses[index];
     setValue('name', address.name);
     setValue('email', address.email);
     setValue('city', address.city);
@@ -44,20 +45,23 @@ export default function UserProfile() {
   };
 
   const handleAdd = (address)=>{
-    const newUser = { ...user, addresses: [...user.addresses, address] }; 
+    const newUser = { ...userInfo, addresses: [...userInfo.addresses, address] }; 
     dispatch(updateUserAsync(newUser));
     setShowAddAddressForm(false);
   }
 
   return (
     <div>
+
       <div className="mx-auto mt-12 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-          <h1 className="text-4xl my-5 font-bold tracking-tight text-gray-900">
-            Name: {user.name ? user.name : 'New User'}
+      <h1 className='mx-auto text-2xl font-Raleway font-semibold px-4  my-2 sm:px-6'>My Profile</h1>
+
+        <div className="border-t border-gray-200 px-4 py-3 sm:px-6">
+          <h1 className="text-3xl my-3  tracking-tight text-gray-900">
+            Name: {userInfo.name ? userInfo.name : 'New userInfo'}
           </h1>
-          <h3 className="text-xl my-5 font-bold tracking-tight text-red-900">
-            email address : {user.email}
+          <h3 className="text-xl my-3 font-bold tracking-tight text-red-900">
+            Email address : {userInfo.email}
           </h3>
         </div>
 
@@ -66,7 +70,7 @@ export default function UserProfile() {
             onClick={e=>{setShowAddAddressForm(true);
                       setSelectedEditIndex(-1)}}
             type="submit"
-            className="rounded-md my-5 bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            className="rounded-md my-2 bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
           >
             Add New Address
           </button>
@@ -75,7 +79,7 @@ export default function UserProfile() {
                   className="bg-white px-5 py-12 mt-12"
                   noValidate
                   onSubmit={handleSubmit((data) => {
-                    console.log(data);
+                    // console.log(data);
                     handleAdd(data);
                     reset();
                   })}
@@ -104,7 +108,7 @@ export default function UserProfile() {
                                 required: 'name is required',
                               })}
                               id="name"
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             />
                             {errors.name && (
                               <p className="text-red-500">
@@ -128,7 +132,7 @@ export default function UserProfile() {
                                 required: 'email is required',
                               })}
                               type="email"
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             />
                             {errors.email && (
                               <p className="text-red-500">
@@ -152,7 +156,7 @@ export default function UserProfile() {
                                 required: 'phone is required',
                               })}
                               type="tel"
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             />
                             {errors.phone && (
                               <p className="text-red-500">
@@ -176,7 +180,7 @@ export default function UserProfile() {
                                 required: 'street is required',
                               })}
                               id="street"
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             />
                             {errors.street && (
                               <p className="text-red-500">
@@ -201,7 +205,7 @@ export default function UserProfile() {
                               })}
                               id="city"
                               autoComplete="address-level2"
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             />
                             {errors.city && (
                               <p className="text-red-500">
@@ -225,7 +229,7 @@ export default function UserProfile() {
                                 required: 'state is required',
                               })}
                               id="state"
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             />
                             {errors.state && (
                               <p className="text-red-500">
@@ -249,7 +253,7 @@ export default function UserProfile() {
                                 required: 'pinCode is required',
                               })}
                               id="pinCode"
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             />
                             {errors.pinCode && (
                               <p className="text-red-500">
@@ -265,7 +269,7 @@ export default function UserProfile() {
                    
                       <button
                         type="submit"
-                        className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        className="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
                       >
                         Add Address
                       </button>
@@ -275,14 +279,13 @@ export default function UserProfile() {
               ) : null}
 
           <p className="mt-0.5 text-sm text-gray-500">Your Addresses :</p>
-          {user.addresses.map((address, index) => (
+          {userInfo.addresses.map((address, index) => (
             <div>
               {selectedEditIndex === index ? (
                 <form
                   className="bg-white px-5 py-12 mt-12"
                   noValidate
                   onSubmit={handleSubmit((data) => {
-                    console.log(data);
                     handleEdit(data, index);
                     reset();
                   })}
@@ -311,7 +314,7 @@ export default function UserProfile() {
                                 required: 'name is required',
                               })}
                               id="name"
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             />
                             {errors.name && (
                               <p className="text-red-500">
@@ -335,7 +338,7 @@ export default function UserProfile() {
                                 required: 'email is required',
                               })}
                               type="email"
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             />
                             {errors.email && (
                               <p className="text-red-500">
@@ -359,7 +362,7 @@ export default function UserProfile() {
                                 required: 'phone is required',
                               })}
                               type="tel"
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             />
                             {errors.phone && (
                               <p className="text-red-500">
@@ -383,7 +386,7 @@ export default function UserProfile() {
                                 required: 'street is required',
                               })}
                               id="street"
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             />
                             {errors.street && (
                               <p className="text-red-500">
@@ -408,7 +411,7 @@ export default function UserProfile() {
                               })}
                               id="city"
                               autoComplete="address-level2"
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             />
                             {errors.city && (
                               <p className="text-red-500">
@@ -432,7 +435,7 @@ export default function UserProfile() {
                                 required: 'state is required',
                               })}
                               id="state"
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             />
                             {errors.state && (
                               <p className="text-red-500">
@@ -456,7 +459,7 @@ export default function UserProfile() {
                                 required: 'pinCode is required',
                               })}
                               id="pinCode"
-                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                             />
                             {errors.pinCode && (
                               <p className="text-red-500">
@@ -472,13 +475,13 @@ export default function UserProfile() {
                       <button
                         onClick={(e) => setSelectedEditIndex(-1)}
                         type="button"
-                        className="rounded-md px-3 py-2 text-sm font-semibold text-grey shadow-sm hover:bg-grey-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        className="rounded-md px-3 py-2 text-sm font-semibold text-grey shadow-sm hover:bg-grey-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
                       >
                         Cancel
                       </button>
                       <button
                         type="submit"
-                        className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        className="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
                       >
                         Edit Address
                       </button>
@@ -512,14 +515,14 @@ export default function UserProfile() {
                   <button
                     onClick={(e) => handleEditForm(index)}
                     type="button"
-                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                    className="font-medium text-green-600 hover:text-green-500"
                   >
                     Edit
                   </button>
                   <button
                     onClick={(e) => handleRemove(e, index)}
                     type="button"
-                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                    className="font-medium text-red-600 hover:text-red-500"
                   >
                     Remove
                   </button>
@@ -529,6 +532,7 @@ export default function UserProfile() {
           ))}
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 }

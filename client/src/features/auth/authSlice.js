@@ -56,11 +56,7 @@ export const signOutAsync = createAsyncThunk(
 export const counterSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(createUserAsync.pending, (state) => {
@@ -105,7 +101,8 @@ export const counterSlice = createSlice({
   },
 });
 
-
+//now loggedInuserToken will provide you only the information that user has login but to access the userInfo 
+//you can access it using selectUserInfo
 export const selectLoggedInUser = (state) => state.auth.loggedInUserToken;
 export const selectError = (state) => state.auth.error;
 export const selectUserChecked = (state) => state.auth.userChecked;

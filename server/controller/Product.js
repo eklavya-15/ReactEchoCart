@@ -1,7 +1,7 @@
 const { Product } = require('../model/Product');
 
 exports.createProduct = async (req, res) => {
-  // this product we have to get from API body
+  // this product we have to get from API body  
   const product = new Product(req.body);
   try {
     const doc = await product.save();
@@ -15,10 +15,9 @@ exports.fetchAllProducts = async (req, res) => {
   // filter = {"category":["smartphone","laptops"]}
   // sort = {_sort:"price",_order="desc"}
   // pagination = {_page:1,_limit=10}
-  // TODO : we have to try with multiple category and brands after change in front-end
   let query = Product.find({});
   let totalProductsQuery = Product.find({});
-
+  // console.log(req.query);
   if (req.query.category) {
     query = query.find({ category: req.query.category });
     totalProductsQuery = totalProductsQuery.find({
@@ -35,7 +34,6 @@ exports.fetchAllProducts = async (req, res) => {
   }
 
   const totalDocs = await totalProductsQuery.count().exec();
-  // console.log({ totalDocs });
 
   if (req.query._page && req.query._limit) {
     const pageSize = req.query._limit;

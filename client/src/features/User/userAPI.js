@@ -5,12 +5,13 @@ export  function fetchLoggedInUserOrders () {
   resolve({data})
   });
 }
-export  function fetchLoggedInUser () {
+export  function fetchLoggedInUserInfo () {
+    //same as loginUser but we will use this for fetching user data
   return new Promise (async (resolve) =>{
-  const response = await fetch('/users/own' )
+  const response = await fetch('/users/own' ) 
   const data = await response.json()
   resolve({data})
-  });
+  }); 
 }
 
 export function updateUser(update) {
@@ -19,7 +20,7 @@ export function updateUser(update) {
       method: 'PATCH',
       body: JSON.stringify(update),
       headers: { 'content-type': 'application/json' },
-    });
+    }); 
     const data = await response.json();
     // TODO: on server it will only return some info of user (not password)
     resolve({ data });

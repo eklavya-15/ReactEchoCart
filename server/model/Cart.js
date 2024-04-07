@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-const {Schema} = mongoose;
 
-
-const cartSchema = new Schema({
-    quantity: { type : Number, required: true},
-    product: { type: Schema.Types.ObjectId, ref: 'Product', required: true},
-    user:{ type: Schema.Types.ObjectId, ref: 'User', required: true}
-})
+const cartSchema = new mongoose.Schema(
+    {
+        quantity: {type: Number,required: true},
+        user:     {type: mongoose.Schema.Types.ObjectId,ref:'User'},
+        product:  {type: mongoose.Schema.Types.ObjectId,ref:'Product'}
+    }
+)
 
 const virtual  = cartSchema.virtual('id');
 virtual.get(function(){
@@ -19,4 +19,4 @@ cartSchema.set('toJSON',{
 })
 
 
-exports.Cart = mongoose.model('Cart',cartSchema)
+exports.Cart = mongoose.model("Cart",cartSchema);

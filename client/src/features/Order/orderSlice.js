@@ -71,7 +71,7 @@ export const orderSlice = createSlice({
       })
   },
 });
-
+ 
 export const { resetOrder } = orderSlice.actions;
 
 export const selectCurrentOrder = (state) => state.order.currentOrder;

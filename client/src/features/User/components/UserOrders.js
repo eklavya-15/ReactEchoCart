@@ -14,7 +14,7 @@ export default function UserOrders() {
       {orders &&
         orders.map((order) => (
           <>
-            <div className="">
+            <div className="" key="order.id">
               <div className="max-w-4xl px-4 sm:px-6 lg:px-8 bg-white my-5 mx-auto ">
                 <div className="">
                   <div className="flow-root">
@@ -57,7 +57,7 @@ export default function UserOrders() {
                                 <div className="text-gray-500">
                                   <label
                                     htmlFor="quantity"
-                                    className="block text-sm inline mr-6 font-medium leading-6 text-gray-900"
+                                    className=" text-sm inline mr-6 font-medium leading-6 text-gray-900"
                                   >
                                     Qty: {item.quantity}
                                   </label>

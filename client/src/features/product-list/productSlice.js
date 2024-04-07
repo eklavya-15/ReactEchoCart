@@ -43,7 +43,6 @@ export const fetchProudctByIdAsync = createAsyncThunk(
   'product/fetchProductById',
   async (id) => {
     const response = await fetchProductById(id);
-    console.log(response.data);
     return response.data;
   }
 );
@@ -52,11 +51,7 @@ export const fetchProudctByIdAsync = createAsyncThunk(
 export const productsSlice = createSlice({
   name: 'product',
   initialState,
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllProductsAsync.pending, (state) => {

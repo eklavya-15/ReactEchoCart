@@ -1,9 +1,14 @@
-export function fetchAllProducts() {
-  return new Promise(async (resolve) => {
-    const response = await fetch("/products");
-    const data = await response.json();
-    resolve({ data });
-  });
+export async function fetchAllProducts() {
+  try {
+    
+      const response = await fetch("/products");
+      const data = await response.json();
+      return { data };
+
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    throw error;
+  } 
 }
 
 export function fetchProductsByFilters(filter, sort, pagination) {
@@ -24,14 +29,12 @@ export function fetchProductsByFilters(filter, sort, pagination) {
     queryString += `${key}=${pagination[key]}&`;
   }
   return new Promise(async (resolve) => {
-    const response = await fetch(
-      "/products?" + queryString
-    );
+    const response = await fetch("/products?" + queryString);
     const data = await response.json();
     const totalItems = await response.headers.get("X-Total-Count");
 
     resolve({ data: { products: data, totalItems: +totalItems } });
-    console.log(data, totalItems);
+    // console.log(data, totalItems);
   });
 }
 export function fetchBrands() {
@@ -41,6 +44,8 @@ export function fetchBrands() {
     resolve({ data });
   });
 }
+
+//There are two ways to fetch promise and async/await we have used promise for all except fetchAllProducts
 export function fetchCategories() {
   return new Promise(async (resolve) => {
     const response = await fetch("/categories");
