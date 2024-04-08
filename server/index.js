@@ -34,11 +34,20 @@ opts.secretOrKey = SECRET_KEY; // TODO: should not be in code;
 //middlewares
 server.use(express.static(path.resolve(__dirname,'build')))
 server.use(cookieParser());
-server.use(session({
-    secret: 'keyboard cat',
-    resave: false, // don't save session if unmodified
+// server.use(session({
+//     secret: 'keyboard cat',
+//     resave: false, // don't save session if unmodified
+//     saveUninitialized: false, // don't create session until something stored
+//   }));
+app.use(session({
+    cookie: { maxAge: 86400000 },
+    store: new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    }),
+    resave: false,
     saveUninitialized: false, // don't create session until something stored
-  }));
+    secret: 'keyboard cat'
+}))
 server.use(passport.authenticate('session'))
 // server.use(express.raw({type: 'application/json'}));
 server.use(express.json()); //to parse req.body
