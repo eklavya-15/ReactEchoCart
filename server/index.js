@@ -5,6 +5,7 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const cookieParser = require('cookie-parser');
+const MemoryStore = express.session.MemoryStore;
 const { User } = require('./model/User');
 const productsRouter = require('./routes/Products');
 const categoriesRouter = require('./routes/Categories');
