@@ -39,7 +39,7 @@ server.use(cookieParser());
 //     resave: false, // don't save session if unmodified
 //     saveUninitialized: false, // don't create session until something stored
 //   }));
-app.use(session({
+server.use(session({
     cookie: { maxAge: 86400000 },
     store: new MemoryStore({
       checkPeriod: 86400000 // prune expired entries every 24h
