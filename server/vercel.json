@@ -35,6 +35,10 @@
        "dest": "index.js"
      },
      {
+      "src": "/navbar/(.*)",
+      "dest": "index.js"
+    },
+     {
        "src": "/users",
        "dest": "index.js"
      },
@@ -71,7 +75,11 @@
        "dest": "index.js"
      },
      {
-       "src": "/create-payment-intent",
+      "src": "/order-success/(.*)",
+      "dest": "index.js"
+    },
+     {
+       "src": "/card-payment",
        "dest": "index.js"
      },
      {
