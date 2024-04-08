@@ -118,34 +118,6 @@ passport.deserializeUser(function (user, cb) {
   });
 });
 
-
-
-
-// Payments
-// This is your test secret API key.
-const stripe = require("stripe")('sk_test_51Ota1lSGDfwWN5Qo82bnHMuJrnrQBQLbHJTqRGwTijMl0rtyjDoeoRAGClXltXgdqmkaVFuguUP53KN1WNWZMv8h009tuFKoyn');
-
-
-server.post("/create-payment-intent", async (req, res) => {
-  // const {subtotal}  = req.body;
-
-  // Create a PaymentIntent with the order amount and currency
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: 1400, // for decimal compensation
-    // amount: subtotal*100, // for decimal compensation
-    currency: "inr",
-    automatic_payment_methods: {
-      enabled: true,
-    },
-  });
-
-  res.send({
-    clientSecret: paymentIntent.client_secret,
-  });
-});
-
-
-
 main().catch(err=>console.log(err))
 async function main(){
     await mongoose.connect(process.env.MONGO_URL);
