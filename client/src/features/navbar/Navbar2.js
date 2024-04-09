@@ -53,7 +53,7 @@ export default function Navbar2() {
       <Disclosure as="nav" >
         {({ open }) => (
           // <nav className=" ">
-          <div className='w-screen'>
+          <div >
             <div className=" flex flex-wrap items-center justify-between mx-auto p-4 bg-[#111827] text-white  z-20 top-0 start-0 border-b border-gray-200">
               <Link
                 to="/"

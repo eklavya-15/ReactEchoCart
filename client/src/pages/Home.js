@@ -10,7 +10,7 @@ export default function Home() {
 
 
   return (
-    <div className='w-screen'>
+    <div >
       {/* <Navbar></Navbar> */}
         <Navbar2 className=""></Navbar2>
         <Hero ></Hero>
