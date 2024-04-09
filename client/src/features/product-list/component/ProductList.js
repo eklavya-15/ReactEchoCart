@@ -223,7 +223,7 @@ export default function ProductList() {
               All Products
             </h1>
             <div className="flex items-center max-w-full overflow-hidden">
-              <Menu as="div" className="relative inline-block text-left">
+              {/* <Menu as="div" className="relative inline-block text-left">
                 <div>
                   <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
                     Sort
@@ -267,7 +267,7 @@ export default function ProductList() {
                     </div>
                   </Menu.Items>
                 </Transition>
-              </Menu>
+              </Menu> */}
 
               <button
                 type="button"
