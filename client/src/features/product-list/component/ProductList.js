@@ -222,15 +222,13 @@ export default function ProductList() {
             <h1 className="text-3xl font-bold tracking-tight text-gray-900 font-Raleway pl-4">
               All Products
             </h1>
-
-        
-            <div className="flex items-center">
+            <div className="flex items-center max-w-full overflow-hidden">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
                   <Menu.Button className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
                     Sort
                     <ChevronDownIcon
-                      className="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                      className="-mr-4 sm:mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                       aria-hidden="true"
                     />
                   </Menu.Button>
@@ -273,14 +271,14 @@ export default function ProductList() {
 
               <button
                 type="button"
-                className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7"
+                className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:mx-3"
               >
                 <span className="sr-only">View grid</span>
                 <Squares2X2Icon className="h-5 w-5" aria-hidden="true" />
               </button>
               <button
                 type="button"
-                className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 md:hidden"
+                className="-m-2 mx-1 p-2 text-gray-400 hover:text-gray-500 sm:-ml-1 sm:mr-1 md:hidden"
                 onClick={() => setMobileFiltersOpen(true)}
               >
                 <span className="sr-only">Filters</span>
@@ -296,14 +294,14 @@ export default function ProductList() {
 
             <div className="grid  gap-x-8 gap-y-10 md:grid-cols-5 sm:grid-cols-3  ">
               {/* Filters */}
-              <form className="hidden md:block  border-r border-gray-900 pt-12 bg-[#fffdd7] ">
-                <hr className="border-gray-900"></hr>
+              <form className="hidden md:block  border-r border-gray-900  bg-[#fffdd7] ">
+                {/* <hr className="border-gray-900"></hr> */}
                 {filters &&
                   filters.map((section) => (
                     <Disclosure
                       as="div"
                       key={section.id}
-                      className="border-b border-gray-900 hover:border-black hover:border px-2 py-6"
+                      className="border-b border-gray-900 hover:border-black hover:border px-2 py-4"
                     >
                       {({ open }) => (
                         <>
