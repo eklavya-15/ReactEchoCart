@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectLoggedInUser } from "../features/auth/authSlice";
 import { resetOrder } from "../features/Order/orderSlice";
 import Navbar2 from "../features/navbar/Navbar2";
+import Footer from "../features/Footer/Footer";
+
 
 function OrderSuccessPage() {
    const params = useParams() 
@@ -41,6 +43,7 @@ function OrderSuccessPage() {
         </div>
       </div>
     </main>
+    <Footer></Footer>
     </>
   );
 }
